@@ -82,6 +82,31 @@
             display: inline;
             margin-right: 20px;
         }
+
+        .code {
+            background-color: #f1f1f1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: monospace;
+            overflow: auto;
+            white-space: pre-wrap;
+        }
+
+        .back {
+            display: inline-block;
+            background-color: black;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back:hover {
+            background-color: #333;
+        }
+
     </style>
 </head>
 <body>
@@ -103,7 +128,7 @@
         <h2>My projects</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         <nav class="container wrap">
-            <a href="#project_1" id="nav_a_black">Project 1</a>
+            <a href="#project_1" id="nav_a_black">1 - Development Environment with Docker and Portainer</a>
             <a href="#project_2" id="nav_a_black">Project 2</a>
             <a href="#project_3" id="nav_a_black">Project 3</a>
             <a href="#project_4" id="nav_a_black">Project 4</a>
@@ -111,24 +136,70 @@
         </nav>
 
         <div class="project" id="project_1">
-            <h3>Project 1</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <h3>Development Environment with Docker and Portainer</h3>
+            <p><b>Objective:</b></p>
+            <p>Create, in a home lab environment, a server to study containers and other applications available in this format.</p>
+
+            <p><b>Hardware and Software Description:</b></p>
+            <p>In this environment, I use an old computer with the following settings:</p>
+            <p>Hardware:</p>
+
+            <ul>
+                <li>4 core CPU;</li>
+                <li>7 GB of RAM;</li>
+                <li>120 GB of SSD;</li>
+                <li>1 TB of HDD;</li>
+                <li>1 Gbps network interface.</li>
+            </ul>
+
+            <p>Software:</p>
+
+            <ul>
+                <li>Linux Ubuntu Server;</li>
+                <li>Docker;</li>
+                <li>Portainer CE;</li>
+                <li>SSH Server.</li>
+            </ul>
+
+            <p><b>Deployment:</b></p>
+            <p>I first install Ubuntu Server Linux. During the installation, I select to install the SSH Server and Docker.</p>
+            <p>Afterward, I set a static IP address for the server.</p>
+            <p>Then, I install Portainer Community Edition (CE) following the official instructions <a href="https://docs.portainer.io/start/install-ce/server/docker/linux">here</a>.</p>
+            <p>To install Portainer, I create a volume to store the Portainer database with the following command:</p>
+            <pre class="code"><code>docker volume create portainer_data</code></pre>
+            <p>Next, I download and install the Portainer Server container with the following command:</p>
+            <pre class="code"><code>docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest</pre></code>
+            <p>I decided to use a self-signed SSL certificate to secure port 9443.</p>
+
+            <p><b>Logging In:</b></p>
+            <p>I log into my local Portainer Server instance by opening a web browser and going to:</p>
+            <pre class="code"><code>https://192.168.1.6:9443</pre></code>
+
+            <a class="back" href="#">Back to home</a>
         </div>
         <div class="project" id="project_2">
             <h3>Project 2</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+            <a class="back" href="#">Back to home</a>
         </div>
         <div class="project" id="project_3">
             <h3>Project 3</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+            <a class="back" href="#">Back to home</a>
         </div>
         <div class="project" id="project_4">
             <h3>Project 4</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+            <a class="back" href="#">Back to home</a>
         </div>
         <div class="project" id="project_5">
             <h3>Project 5</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+            <a class="back" href="#">Back to home</a>
         </div>
     </div>
 

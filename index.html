@@ -38,7 +38,7 @@
         #nav_a_black {
             text-decoration: none;
             color: #000;
-            margin: 0 20px;
+            margin: 0 0px;
         } 
 
         .container {
@@ -127,21 +127,23 @@
     <div class="container" id="projects">
         <h2>My projects</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <nav class="container wrap">
-            <a href="#project_1" id="nav_a_black">1 - Development Environment with Docker and Portainer</a>
-            <a href="#project_2" id="nav_a_black">Project 2</a>
-            <a href="#project_3" id="nav_a_black">Project 3</a>
-            <a href="#project_4" id="nav_a_black">Project 4</a>
-            <a href="#project_5" id="nav_a_black">Project 5</a>
-        </nav>
+        <ul>
+            <li><a href="#project_1" id="nav_a_black">Development Environment with Docker and Portainer</a></li>
+            <li><a href="#project_2" id="nav_a_black">Project 2</a></li>
+            <li><a href="#project_3" id="nav_a_black">Project 3</a></li>
+            <li><a href="#project_4" id="nav_a_black">Project 4</a></li>
+            <li><a href="#project_5" id="nav_a_black">Project 5</a></li>
+        </ul>
+    </div>
 
-        <div class="project" id="project_1">
-            <h3>1 - Development Environment with Docker and Portainer</h3>
+    <div class="container" id="project_1">
+        <div class="project" id="">
+            <h2>Development Environment with Docker and Portainer</h2>
             <p><b>Objective:</b></p>
             <p>Create, in a home lab environment, a server to study containers and other applications available in this format.</p>
 
             <p><b>Hardware and Software Description:</b></p>
-            <p>In this environment, I use an old computer with the following settings:</p>
+            <p>In this environment, was used an old computer with the following settings:</p>
             <p>Hardware:</p>
 
             <ul>
@@ -162,41 +164,73 @@
             </ul>
 
             <p><b>Deployment:</b></p>
-            <p>I first install Ubuntu Server Linux. During the installation, I select to install the SSH Server and Docker.</p>
-            <p>Afterward, I set a static IP address for the server.</p>
-            <p>Then, I install Portainer Community Edition (CE) following the official instructions <a href="https://docs.portainer.io/start/install-ce/server/docker/linux">here</a>.</p>
-            <p>To install Portainer, I create a volume to store the Portainer database with the following command:</p>
+
+            <p>First was installed Ubuntu Server Linux. During the installation, was selected to install the SSH Server and Docker.</p>
+            <p>Afterward, was set a static IP address for the server.</p>
+            <p>Then, was installed Portainer Community Edition (CE) following the official instructions <a href="https://docs.portainer.io/start/install-ce/server/docker/linux">here</a>.</p>
+            <p>To install Portainer, was created a volume to store the Portainer database with the following command:</p>
             <pre class="code"><code>docker volume create portainer_data</code></pre>
-            <p>Next, I download and install the Portainer Server container with the following command:</p>
+            <p>Next, was downloaded and installed the Portainer Server container with the following command:</p>
             <pre class="code"><code>docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest</pre></code>
-            <p>I decided to use a self-signed SSL certificate to secure port 9443.</p>
+            <p>It was decided to use a self-signed SSL certificate to secure port 9443.</p>
 
             <p><b>Logging In:</b></p>
-            <p>I log into my local Portainer Server instance by opening a web browser and going to:</p>
+            <p>To log into the on-premises Portainer Server instance, open a web browser and go to:</p>
             <pre class="code"><code>https://192.168.1.6:9443</pre></code>
 
             <a class="back" href="#">Back to home</a>
         </div>
-        <div class="project" id="project_2">
-            <h3>Project 2</h3>
+    </div>
+
+    <div class="container" id="project_2">
+        <div class="project" id="">
+            <h2>Deployment of a Nextcloud instance with MariaDB in a Portainer environment</h2>
+
+            <p><b>Objective:</b></p>
+
+            <p>Deployment of a Nextcloud instance in a homelab environment, providing an on-premises service for personal cloud and file storage. This instance was deployed in a Docker/Portainer environment, with a separate MariaDB container for the database.</p>
+            <p><b>MariaDB configuration:</b></p>
+            <p>A MariaDB container was downloaded and executed with the following command, replacing the <i>user</i>, <i>password</i>, and <i>root password</i> with the appropriate values:</p>
+            <pre class="code"><code>docker run --detach --name mariadb --env MARIADB_USER=<i>your_user</i> --env MARIADB_PASSWORD=<i>your_password</i> --env MARIADB_ROOT_PASSWORD=<i>root_password</i> -p 32768:3306 mariadb:latest</code></pre>
+
+            <p><b>phpMyAdmin configuration:</b></p>
+
+            <p>A phpMyAdmin container was deployed to study the Nextcloud MariaDB database.</p>
+            <p>To accomplish this, a container containing phpMyAdmin was downloaded and executed, connected to a linked server using the following command:</p>
+            <pre class="code"><code>docker run --name phpmyadmin -d --link mysql_db_server:db -p 8090:80 phpmyadmin</pre></code>
+
+            <p><b>Nextcloud installation and configuration:</b></p>
+
+            <p></p>
+
+
+
+
+            <a class="back" href="#">Back to home</a>
+        </div>
+    </div>
+
+    <div class="container" id="project_3">
+        <div class="project" id="">
+            <h2>Project 3</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 
             <a class="back" href="#">Back to home</a>
         </div>
-        <div class="project" id="project_3">
-            <h3>Project 3</h3>
+    </div>
+
+    <div class="container" id="project_4">
+        <div class="project" id="">
+            <h2>Project 4</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 
             <a class="back" href="#">Back to home</a>
         </div>
-        <div class="project" id="project_4">
-            <h3>Project 4</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </div>
 
-            <a class="back" href="#">Back to home</a>
-        </div>
-        <div class="project" id="project_5">
-            <h3>Project 5</h3>
+    <div class="container" id="project_5">
+        <div class="project" id="">
+            <h2>Project 5</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 
             <a class="back" href="#">Back to home</a>

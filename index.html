@@ -5,70 +5,114 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diego Tumelero</title>
     <style>
+        :root {
+        /* Light mode */
+            --background-primary: #ffffff;
+            --background-secondary: #f0f0f0;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --header-footer-bg: #333333;
+            --header-footer-text: #ffffff;
+            --code-bg: #f1f1f1;
+            --code-border: #cccccc;
+            --button-bg: #333333;
+            --button-text: #ffffff;
+            --container-bg: #ffffff;
+            --link-color: #0066cc;
+        }
+
+        /* Dark mode */
+        [data-theme="dark"] {
+            --background-primary: #333333;
+            --background-secondary: #222222;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --header-footer-bg: #1a1a1a;
+            --header-footer-text: #ffffff;
+            --code-bg: #2d2d2d;
+            --code-border: #444444;
+            --button-bg: #ffffff;
+            --button-text: #333333;
+            --container-bg: #444444;
+            --link-color: #66b3ff;
+        }
+
+        /* Reset and base styles */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            background-color: var(--background-secondary);
+            color: var(--text-primary);
             margin: 0;
             padding: 0;
         }
 
+        /* Header */
         header {
-            background-color: #333;
-            color: #fff;
+            background-color: var(--header-footer-bg);
+            color: var(--header-footer-text);
             text-align: center;
-            padding: 20px 0;
+            padding: 1px 0;
         }
 
         h1 {
             margin: 0;
         }
 
+        /* Navigation */
         nav {
-            display: flex;
+          display: flex;
             justify-content: center;
             margin-top: 20px;
         }
 
-        #nav_a_white {
+        nav a {
             text-decoration: none;
-            color: #fff;
             margin: 0 20px;
-        } 
+        }
+
+        #nav_a_white {
+            color: var(--header-footer-text);
+        }
 
         #nav_a_black {
-            text-decoration: none;
-            color: #000;
-            margin: 0 0px;
-        } 
+            color: var(--text-primary);
+        }
 
+        /* Main container */
         .container {
             max-width: 800px;
             margin: 20px auto;
             padding: 20px;
-            background-color: #fff;
+            background-color: var(--container-bg);
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .wrap {
             flex-wrap: wrap;
         }
 
+        /* Typography */
         h2 {
             font-size: 24px;
+            color: var(--text-primary);
         }
 
         p {
             font-size: 16px;
             line-height: 1.5;
+            color: var(--text-secondary);
         }
 
+        /* Footer */
         footer {
-            background-color: #333;
-            color: #fff;
+            background-color: var(--header-footer-bg);
+            color: var(--header-footer-text);
             text-align: center;
             padding: 10px 0;
         }
 
-        /* CSS for menu */
+        /* Menu */
         #menu {
             text-align: center;
         }
@@ -83,33 +127,68 @@
             margin-right: 20px;
         }
 
+        /* Code blocks */
         .code {
-            background-color: #f1f1f1;
+            background-color: var(--code-bg);
             padding: 10px;
-            border: 1px solid #ccc;
+            border: 1px solid var(--code-border);
             border-radius: 5px;
             font-family: monospace;
             overflow: auto;
             white-space: pre-wrap;
+            color: var(--text-primary);
         }
 
-        .back {
+        /* Buttons */
+        .back,
+        button {
             display: inline-block;
-            background-color: black;
-            color: white;
+            background-color: var(--button-bg);
+            color: var(--button-text);
             padding: 10px 20px;
             text-decoration: none;
             border-radius: 5px;
             font-weight: bold;
+            border: none;
+            cursor: pointer;
         }
 
-        .back:hover {
-            background-color: #333;
+        .back:hover,
+        button:hover {
+            opacity: 0.9;
+        }
+        
+        /* Links */
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+        
+        .div_theme {
+            background-color: var(--header-footer-bg);
+            padding: 5px;
+            text-align: right;
+        }
+        
+        .button_theme {
+            display: inline-block;
+            background-color: #ffffff;
+            color: #333333;
+            padding: 5px 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
         }
 
     </style>
 </head>
 <body>
+    <div class="div_theme">
+        <button class="button_theme" onclick="toggleTheme()">Toggle theme</button>
+    </div>
+    
     <header>
         <h1>Diego Tumelero</h1>
         <nav>
@@ -130,9 +209,11 @@
         <ul>
             <li><a href="#project_1" id="nav_a_black">Development Environment with Docker and Portainer</a></li>
             <li><a href="#project_2" id="nav_a_black">Deployment of a Nextcloud instance with MariaDB</a></li>
+<!--
             <li><a href="#project_3" id="nav_a_black">Project 3</a></li>
             <li><a href="#project_4" id="nav_a_black">Project 4</a></li>
             <li><a href="#project_5" id="nav_a_black">Project 5</a></li>
+-->
         </ul>
     </div>
 
@@ -171,14 +252,23 @@
             <p>To install Portainer, was created a volume to store the Portainer database with the following command:</p>
             <pre class="code"><code>docker volume create portainer_data</code></pre>
             <p>Next, was downloaded and installed the Portainer Server container with the following command:</p>
-            <pre class="code"><code>docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest</pre></code>
+            <pre class="code"><code>docker run \
+    -d --name portainer \
+    --restart=always \
+    -p 8000:8000 \
+    -p 9443:9443 \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v portainer_data:/data portainer/portainer-ce:latest</pre></code>
             <p>It was decided to use a self-signed SSL certificate to secure port 9443.</p>
 
             <p><b>Logging In:</b></p>
             <p>To log into the on-premises Portainer Server instance, open a web browser and go to:</p>
             <pre class="code"><code>https://192.168.1.6:9443</pre></code>
+            <p>Another way to install Portainer, more elegant, easy, and automated is using a dockerfile. Dockerfiles, in summary, are scripts for Docker that, in this case, automate the installation of Portainer, but allow you to do much more than that.</p>
+            <p>There is an official Portainer dockerfile available <a href="https://github.com/portainer/portainer-compose">here</a>.</p>
+            <p>By default, that dockerfile will install it on port 9000.</p>
 
-            <a class="back" href="#">Back to home</a>
+            <a class="back" href="#">Back to top</a>
         </div>
     </div>
 
@@ -189,33 +279,79 @@
             <p><b>Objective:</b></p>
 
             <p>Deployment of a Nextcloud instance in a homelab environment, providing an on-premises service for personal cloud and file storage. This instance was deployed in a Docker/Portainer environment, with a separate MariaDB container for the database.</p>
+
             <p><b>MariaDB configuration:</b></p>
+
+            <p>To create a container for MariaDB, I have set up a volume as per the command below.</p>
+            <pre class="code"><code>sudo docker volume create mariadb</code></pre>
             <p>A MariaDB container was downloaded and executed with the following command, replacing the <i>user</i>, <i>password</i>, and <i>root password</i> with the appropriate values:</p>
-            <pre class="code"><code>docker run --detach --name mariadb --env MARIADB_USER=<i>your_user</i> --env MARIADB_PASSWORD=<i>your_password</i> --env MARIADB_ROOT_PASSWORD=<i>root_password</i> -p 32768:3306 mariadb:latest</code></pre>
+            <pre class="code"><code>sudo docker run \
+    -d --name mariadb \
+    --env MARIADB_USER=<i>user</i> \
+    --env MARIADB_PASSWORD=<i>password</i> \
+    --env MARIADB_ROOT_PASSWORD=<i>root_password</i> \
+    -v /var/lib/docker/volumes/mariadb/_data:/var/lib/mysql \
+    --network <i>homelab</i> \
+    --ip <i>address</i> \
+    -p 32768:3306 \
+    mariadb:latest</code></pre>
 
             <p><b>phpMyAdmin configuration:</b></p>
 
             <p>A phpMyAdmin container was deployed to study the Nextcloud MariaDB database.</p>
             <p>To accomplish this, a container containing phpMyAdmin was downloaded and executed, connected to a linked server using the following command:</p>
-            <pre class="code"><code>docker run --name phpmyadmin -d --link mysql_db_server:db -p 8090:80 phpmyadmin</pre></code>
+            <pre class="code"><code>docker run \
+    -d --name phpmyadmin \
+    --link mysql_db_server:db \
+    -p 8090:80 \
+    phpmyadmin:latest</pre></code>
 
-            <p><b>Nextcloud installation and configuration:</b></p>
+            <p><b>Network configuration:</b></p>
+            <p>To facilitate communication between the database and NextCloud, a network named 'homelab' was established, using the command below.</p>
+            <pre class="code"><code>sudo docker run \
+    -d --name phpmyadmin \
+    --network <i>homelab</i> \
+    -d --link mariadb:db \
+    -p 8090:80 \
+    phpmyadmin</code></pre>
 
-            <p></p>
+            <p><b>Nextcloud installation:</b></p>
 
+            <p>For the NextCloud container, a volume named 'nextcloud' was created using the command below.</p>
 
+            <pre class="code"><code>sudo docker volume create nextcloud</code></pre>
 
+            <p>The Nextcloud container was deployed using an Apache image, which includes a web server on port 80 and exposes port 8080 during startup.</p>
+            <p>In addition, the command below includes the parameters for the database and the volume mapping for NextCloud.</p>
 
-            <a class="back" href="#">Back to home</a>
+            <pre class="code"><code>sudo docker run \
+    -d --name nextcloud \
+    --network <i>homelab</i> \
+    -p 8080:80 \
+    -v /var/lib/docker/volumes/nextcloud/_data:/var/www/html/data \
+    -e MYSQL_HOST=<i>address</i>:3306 \
+    -e MYSQL_DATABASE=nc \
+    -e MYSQL_USER=<i>user</i> \
+    -e MYSQL_PASSWORD=<i>password</i> \
+    nextcloud:latest</pre></code>
+
+            <p>Now, Nextcloud is available at http://localhost:8080/ from your host system. However, HTTPS is not yet enabled.</p>
+
+            <p><b>Enabling HTTPS with a self-signed certificate:</b></p>
+
+            <p>para adicionar uma camada de segurança, </p>
+
+            <a class="back" href="#">Back to top</a>
         </div>
     </div>
 
+<!--
     <div class="container" id="project_3">
         <div class="project" id="">
             <h2>Project 3</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 
-            <a class="back" href="#">Back to home</a>
+            <a class="back" href="#">Back to top</a>
         </div>
     </div>
 
@@ -224,7 +360,7 @@
             <h2>Project 4</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 
-            <a class="back" href="#">Back to home</a>
+            <a class="back" href="#">Back to top</a>
         </div>
     </div>
 
@@ -233,9 +369,11 @@
             <h2>Project 5</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 
-            <a class="back" href="#">Back to home</a>
+            <a class="back" href="#">Back to top</a>
         </div>
     </div>
+
+-->
 
     <div class="container" id="contact">
         <h2>Contact</h2>
@@ -245,5 +383,18 @@
     <footer>
         &copy; 2023 Diego Tumelero
     </footer>
+
+    <script>
+        function toggleTheme() {
+            const body = document.documentElement;
+            const currentTheme = body.getAttribute('data-theme');
+          
+            if (currentTheme === 'dark') {
+                body.removeAttribute('data-theme');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+            }
+        }
+    </script>
 </body>
 </html>

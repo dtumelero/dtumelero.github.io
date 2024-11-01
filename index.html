@@ -98,10 +98,15 @@
             color: var(--text-primary);
         }
 
+        h3 {
+            font-size: 19.2px;
+        }
+        
         p {
             font-size: 16px;
             line-height: 1.5;
             color: var(--text-secondary);
+            text-align: justify;
         }
 
         /* Footer */
@@ -191,6 +196,7 @@
     
     <header>
         <h1>Diego Tumelero</h1>
+        <h3>IT Infrastructure Engineer</h3>
         <nav>
             <a href="#about" id="nav_a_white">About</a>
             <a href="#projects" id="nav_a_white">Projects</a>
@@ -200,12 +206,18 @@
 
     <div class="container" id="about">
         <h2>About me</h2>
-        <p>Lorem ipsum dolor sit amet.</p>
+        <p>With a solid trajectory in IT infrastructure, I combine technical and teaching experience to offer innovative and effective solutions. My professional journey includes a significant stint at the Banco do Estado do Rio Grande do Sul as an Infrastructure Analyst, where I developed expertise in MFT (Managed File Transfer), EDI (Electronic Data Interchange) with IBM tools, and explored the RPA (Robotic Process Automation) universe using Automation Anywhere platforms.</p>
+        <p>In parallel with my work in the corporate market, I also dedicated myself to teaching, working as an adjunct professor at Alcides Maya College of Technology and as a substitute professor at IFRS - Canoas Campus. This teaching experience enriched my ability to communicate and share technical knowledge.</p>
+        <p>My differentiator lies in the ability to integrate data sources, perform remote troubleshooting, and provide excellent customer service. I firmly believe in continuous learning, constantly staying updated on the latest technological trends.</p>
+        <p>In the linguistic realm, beyond my native Portuguese, I have an advanced level of English and possess basic knowledge of French and Spanish, which broadens my communication and professional possibilities in globalized environments.</p>
+        <p>Currently, I am seeking a challenging opportunity where I can apply my expertise in IT infrastructure, automation, and customer support, making a significant contribution to the success of innovative organizations.
+        </p>
+        <a class="back" href="#">Back to top</a>
     </div>
 
     <div class="container" id="projects">
         <h2>My projects</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>In my homelab dedicated to studying and implementing modern technologies, I develop various IT infrastructure projects. My portfolio includes a containerized development environment with Docker and Portainer, offering efficient container management, and a Nextcloud implementation with MariaDB for private cloud storage. <!--Complementing these solutions, I maintain a Raspberry Pi running services such as Pi-hole for ad blocking, VPN with Wireguard for secure remote access, and an ADS-B receiver for aircraft tracking. -->These projects, among others in development, demonstrate my experience with current containerization technologies and open-source solutions in practical laboratory environments.</p>
         <ul>
             <li><a href="#project_1" id="nav_a_black">Development Environment with Docker and Portainer</a></li>
             <li><a href="#project_2" id="nav_a_black">Deployment of a Nextcloud instance with MariaDB</a></li>
@@ -215,6 +227,7 @@
             <li><a href="#project_5" id="nav_a_black">Project 5</a></li>
 -->
         </ul>
+        <a class="back" href="#">Back to top</a>
     </div>
 
     <div class="container" id="project_1">
@@ -335,12 +348,10 @@
     -e MYSQL_PASSWORD=<i>password</i> \
     nextcloud:latest</pre></code>
 
-            <p>Now, Nextcloud is available at http://localhost:8080/ from your host system. However, HTTPS is not yet enabled.</p>
+            <p>Now, Nextcloud is available at http://localhost:8080/ from your host system.</p>
 
-            <p><b>Enabling HTTPS with a self-signed certificate:</b></p>
-
-            <p>para adicionar uma camada de segurança, </p>
-
+            <p>Another, and more automated way to deploy a container with Nextcloud is using a Dockerfile, as shown <a href="https://github.com/nextcloud/docker#base-version---apache">here</a></p>
+            
             <a class="back" href="#">Back to top</a>
         </div>
     </div>
@@ -372,7 +383,6 @@
             <a class="back" href="#">Back to top</a>
         </div>
     </div>
-
 -->
 
     <div class="container" id="contact">

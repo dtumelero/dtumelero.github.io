@@ -52,10 +52,10 @@
             color: var(--header-footer-text);
             text-align: center;
             padding: 1px 0;
-        }
-
-        h1 {
-            margin: 0;
+            background-image: url('maze.jpeg');
+            background-size: cover;
+            background-position: center;
+            height: 90px;
         }
 
         /* Navigation */
@@ -93,6 +93,11 @@
         }
 
         /* Typography */
+        h1 {
+            margin: 0;
+            line-height: 100%;
+        }
+        
         h2 {
             font-size: 24px;
             color: var(--text-primary);
@@ -100,6 +105,7 @@
 
         h3 {
             font-size: 19.2px;
+            line-height: 1%;
         }
         
         p {
@@ -170,28 +176,59 @@
         }
         
         .div_theme {
-            background-color: var(--header-footer-bg);
+            /*background-color: var(--header-footer-bg);*/
             padding: 5px;
             text-align: right;
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 1000;
         }
         
         .button_theme {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
             background-color: #ffffff;
             color: #333333;
-            padding: 5px 10px;
+            padding: 2px 5px;
             text-decoration: none;
             border-radius: 5px;
             font-weight: bold;
-            border: none;
+            border: 1px solid #333333;
             cursor: pointer;
+        }
+    
+        .button_theme svg {
+            width: 16px;
+            height: 16px;
+            margin-right: 5px;
         }
 
     </style>
 </head>
 <body>
     <div class="div_theme">
-        <button class="button_theme" onclick="toggleTheme()">Toggle theme</button>
+        <button class="button_theme" onclick="toggleTheme()">
+            <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24">
+                <circle 
+                    cx="12" 
+                    cy="12" 
+                    r="10" 
+                    fill="none" 
+                    stroke="#333333" 
+                    stroke-width="2"
+                />
+                <path 
+                    d="M12 2 A10 10 0 0 0 12 22 L12 2" 
+                    fill="#333333"
+                />
+                <path 
+                    d="M12 2 A10 10 0 0 1 12 22 L12 2" 
+                    fill="#FAFAFA"
+                />
+            </svg>
+            Toggle theme
+        </button>
     </div>
     
     <header>
